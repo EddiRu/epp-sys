@@ -1,0 +1,7 @@
+{
+  "name": "epp-sys",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
