@@ -4,6 +4,7 @@ import { AgrearUsuarioComponent } from 'src/app/components/modal/agrear-usuario/
 import { AuthService } from 'src/app/services/firebase/auth.service';
 import { AlertController } from '@ionic/angular';
 import { EditarUsuarioComponent } from 'src/app/components/modal/editar-usuario/editar-usuario.component';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-users',
@@ -15,6 +16,7 @@ export class UsersPage implements OnInit {
   usuarios: any[] = []; // Lista de usuarios original
   usuariosFiltrados: any[] = []; // Lista de usuarios filtrados
   searchTerm: string = ''; // Filtro de búsqueda
+  usuarioActualEmail: any = [];
 
   // Configuración de la paginación
   paginaActual: number = 1;
@@ -36,11 +38,17 @@ export class UsersPage implements OnInit {
     private authservice: AuthService,
     private toastController: ToastController,
     private alertController: AlertController,
+    private storageService: StorageService
   ) {
 
   }
   ngOnInit() {
     this.obtenerUsuarios();
+  }
+
+  async ionViewWillEnter(){
+    this.usuarioActualEmail = await this.storageService.get('usuario');
+    this.usuarioActualEmail = this.usuarioActualEmail.email
   }
 
   async presentToast(type: 'success' | 'warning' | 'error', message: string) {

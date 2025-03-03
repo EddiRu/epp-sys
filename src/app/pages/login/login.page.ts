@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IonModal, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { RecuperarContraComponent } from 'src/app/components/modal/recuperar-contra/recuperar-contra.component';
 import { AuthService } from 'src/app/services/firebase/auth.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
     private modalController: ModalController,
     private laodingController: LoadingController,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -69,6 +71,7 @@ export class LoginPage implements OnInit {
         this.authService.login(this.loginForm.value).then((res:any) => {
           if(res){
             this.presentToast('success', 'Has iniciado sesión correctamente');
+            this.storageService.set('usuario', res); // Guarda el token en el storage
             this.router.navigateByUrl('/dashboard', {replaceUrl: true})
           }else{
             this.presentToast('warning', 'El correo o contraseña no son válidos');

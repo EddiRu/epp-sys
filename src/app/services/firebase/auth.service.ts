@@ -15,6 +15,7 @@ import {
   collection,
   collectionData,
   deleteDoc,
+  getDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -88,13 +89,25 @@ export class AuthService {
   // Login de usuario
   async login({ email, password }: { email: string; password: string }) {
     try {
-      const user = await signInWithEmailAndPassword(this.auth, email, password);
-      return user;
+        const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+        const user = userCredential.user; // 📌 Extrae el usuario autenticado correctamente
+
+        // 🔥 Obtiene la referencia del documento en Firestore
+        const userDocRef = doc(this.firestore, 'usuarios', user.uid);
+        const userSnapshot = await getDoc(userDocRef);
+
+        if (userSnapshot.exists()) {
+            return userSnapshot.data(); // 🔥 Retorna la información del usuario desde Firestore
+        } else {
+            console.error('El usuario no tiene un documento en Firestore.');
+            return null;
+        }
     } catch (e) {
-      console.error('Error al iniciar sesión:', e);
-      return null;
+        console.error('Error al iniciar sesión:', e);
+        return null;
     }
-  }
+}
+
 
   async restartPassword({ email }: { email: string }) {
     try {
