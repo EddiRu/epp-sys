@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AgrearUsuarioComponent } from 'src/app/components/modal/agrear-usuario/agrear-usuario.component';
 import { AuthService } from 'src/app/services/firebase/auth.service';
-import { PaginationInstance } from 'ngx-pagination';
+import { AlertController } from '@ionic/angular';
+import { EditarUsuarioComponent } from 'src/app/components/modal/editar-usuario/editar-usuario.component';
 
 @Component({
   selector: 'app-users',
@@ -32,12 +33,25 @@ export class UsersPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private toastController: ToastController,
+    private alertController: AlertController,
   ) {
 
   }
   ngOnInit() {
     this.obtenerUsuarios();
+  }
+
+  async presentToast(type: 'success' | 'warning' | 'error', message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      cssClass: `toast-${type}` // Usa el tipo de toast correcto
+    });
+  
+    await toast.present();
   }
 
   async obtenerUsuarios() {
@@ -104,12 +118,54 @@ export class UsersPage implements OnInit {
     await modalCrearUsuario.present();
   }
 
-  editarUsuario(usuario: any) {
+  async editarUsuario(usuario: any) {
     console.log('Editar usuario:', usuario);
+    const modalEdicionUsuario = await this.modalController.create({
+      component: EditarUsuarioComponent,
+      cssClass: 'modal-contenedor-editar-usuario',
+      componentProps: {
+        usuario: usuario
+      }
+    });
+    await modalEdicionUsuario.present();
   }
 
-  eliminarUsuario(usuario: any) {
-    console.log('Eliminar usuario:', usuario);
+  async bloquearUsuario(usuario: any) {
+    console.log(usuario)
+    const alert = await this.alertController.create({
+      header: 'Confirmar Eliminación',
+      message: `¿Estás seguro de que deseas ${usuario.actInact == "false" ? 'Desbloquear' : 'Bloquear'} a ${usuario.usuario}?`,
+      cssClass: 'custom-alert', // Agregamos la clase CSS personalizada
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'cancel-button',
+        },
+        {
+          text: usuario.actInact == "false" ? 'Desbloquear' : 'Bloquear',
+          handler: async () => {
+            if(usuario.actInact == "false"){
+              this.authservice.habilitarUsuario(usuario.id).then((res) => {
+                console.log(res);
+                this.presentToast('success','Usuario habilitado correctamente');
+              })
+            }else{
+              this.authservice.deshabilitarUsuario(usuario.id).then((res) => {
+                console.log(res);
+                this.presentToast('success','Usuario deshabilitado correctamente');
+              })
+            }
+
+            
+            
+          },
+          cssClass: usuario.actInact == "false" ? 'success-button' : 'delete-button'
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
