@@ -1,0 +1,22 @@
+<aside [class.collapsed]="menuColapsado" class="menu-lateral">
+  <button class="toggle-btn" (click)="toggleMenu()">
+    <ion-icon [name]="menuColapsado ? 'menu-outline' : 'close-outline'" style="color: black;"></ion-icon>
+  </button>
+
+  <nav>
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.route" [title]="item.label">
+          <ion-icon class="itemColapsado" [name]="item.icon"></ion-icon>
+          <span *ngIf="!menuColapsado">{{ item.label }}</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="cerrarSesion()" routerLink="/login">
+          <ion-icon class="itemColapsado" name="log-out-outline"></ion-icon>
+          <span *ngIf="!menuColapsado">Cerrar sesión</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

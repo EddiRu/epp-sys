@@ -1,0 +1,96 @@
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  z-index: 1000;
+}
+
+/* Ajustar margen para que el contenido no quede debajo del header */
+main {
+  transition: margin-left 0.3s ease-in-out, padding-top 0.3s ease-in-out;
+  margin-left: 250px;
+  /* Ajuste para el menú lateral */
+  padding-top: 80px;
+  /* Espacio suficiente debajo del header */
+}
+
+/* Cuando el menú está colapsado, ajustar el margen */
+.menu-open {
+  margin-left: 80px;
+}
+
+/* Ajustar también ion-content */
+ion-content {
+  padding-top: 60px;
+  /* Espacio suficiente debajo del header */
+  display: block;
+}
+
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  z-index: 900;
+}
+
+/* Estilos cuando el menú está abierto */
+main {
+  position: absolute;
+  top: 60px; /* Espacio para el header */
+  width: calc(100% - 250px); /* Ajuste automático al tamaño del menú */
+  height: calc(100vh - 60px);
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  padding: 20px;
+  background: white;
+}
+
+/* Cuando el menú está colapsado */
+/* Cuando el menú está COLAPSADO */
+.menu-collapsed {
+  transform: translateX(-195px);
+  width: calc(100% - 55px);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: #e0e0e0;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2),
+    -15px -15px 30px rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.menu-lateral.collapsed {
+  width: 80px;
+}

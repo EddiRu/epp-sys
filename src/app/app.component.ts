@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { MenuService } from './services/menu.service';
+import { TituloService } from './services/titulo.service';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +11,43 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  tituloModulo = 'Dashboard';
+  menuColapsado = false;
+  usuarioAutenticado: boolean = false;
+
+  // Definir nombres de módulos según la ruta
+  modulos: { [key: string]: string } = {
+    '/dashboard': 'Dashboard',
+    '/users': 'Gestión de Usuarios',
+    '/equipos': 'Registro de Equipos',
+    '/reportes': 'Reportes',
+    '/configuracion': 'Configuración',
+  };
+
+  constructor(
+    private menuService: MenuService,
+    private tituloService: TituloService,
+    private auth: Auth,
+    private router: Router
+  ) {
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Verificar si la ruta existe en los módulos, si no, dejar Dashboard por defecto
+        this.tituloModulo = this.modulos[event.url] || 'Dashboard';
+      }
+    });
+
+    onAuthStateChanged(this.auth, (user) => {
+      this.usuarioAutenticado = !!user;
+    });
+
+    this.menuService.menuColapsado$.subscribe(state => {
+      this.menuColapsado = state;
+    });
+
+    this.tituloService.titulo$.subscribe(titulo => {
+      this.tituloModulo = titulo;
+    });
+  }
 }

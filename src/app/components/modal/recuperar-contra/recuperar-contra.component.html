@@ -1,0 +1,32 @@
+<ion-content class=" bg-gray-200">
+  <!-- Formulario en reactive forms para obtener el correo-->
+    <form [formGroup]="formulario" (ngSubmit)="enviarCorreo()">
+      <div class="p-8">
+
+        <h2 class="text-2xl font-semibold text-center text-gray-700">Recuperar Contraseña</h2>
+    
+        <p class="text-gray-600 text-center mt-2">
+          Ingresa tu correo y te enviaremos instrucciones para restablecer tu contraseña.
+        </p>
+    
+        <div class="mt-6">
+          <label class="block text-sm font-medium text-gray-600">Correo Electrónico</label>
+          <input type="email" placeholder="usuario@ejemplo.com"
+            class="w-full p-3 mt-2 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base" formControlName="email">
+        </div>
+    
+        <!-- Botón de Recuperar -->
+        <button type="submit"
+          class="w-full mt-6 p-3 rounded-xl bg-gray-300 shadow-[6px_6px_12px_rgba(0,0,0,0.2),-6px_-6px_12px_rgba(255,255,255,0.7)] active:shadow-[inset_6px_6px_12px_rgba(0,0,0,0.2),inset_-6px_-6px_12px_rgba(255,255,255,0.7)] transition-all text-base font-semibold">
+          Enviar Instrucciones
+        </button>
+    
+        <!-- Botón para cerrar el modal -->
+        <div style="text-align: center;">
+          <button (click)="cerrarModal()" class="mt-4 text-sm text-gray-600 hover:text-gray-800 transition">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+</ion-content>

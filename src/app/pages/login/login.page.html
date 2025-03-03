@@ -1,0 +1,54 @@
+<ion-content [fullscreen]="true">
+  <!-- Formulario con reactive forms para solicitar la información -->
+
+  <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+
+
+    <!-- Título del sistema -->
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-700 mb-6 text-center">
+      Administración <br> Equipo de Protección Personal
+    </h1>
+
+    <div
+      class="bg-gray-200 rounded-2xl shadow-[15px_15px_30px_rgba(0,0,0,0.2),-15px_-15px_30px_rgba(255,255,255,0.7)] overflow-hidden w-full max-w-[900px] md:flex">
+
+      <!-- Imagen -->
+      <div class="w-full md:w-1/2 h-48 md:h-auto">
+        <img src="/assets/img/p-mina.jpg" alt="EPP Login" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Sección de Login -->
+
+      <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <h2 class="text-2xl md:text-3xl font-semibold text-center text-gray-700">Iniciar Sesión</h2>
+
+          <div class="mt-6">
+            <label class="block text-sm font-medium text-gray-600">Correo Electrónico</label>
+            <input type="email" placeholder="usuario@ejemplo.com"
+              class="w-full p-3 mt-2 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="email">
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-600">Contraseña</label>
+            <input type="password" placeholder="********"
+              class="w-full p-3 mt-2 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="password">
+          </div>
+
+          <!-- Botón de Ingresar -->
+          <button type="submit"
+            class="w-full mt-6 p-3 rounded-xl bg-gray-300 shadow-[6px_6px_12px_rgba(0,0,0,0.2),-6px_-6px_12px_rgba(255,255,255,0.7)] active:shadow-[inset_6px_6px_12px_rgba(0,0,0,0.2),inset_-6px_-6px_12px_rgba(255,255,255,0.7)] transition-all text-base font-semibold">
+            Ingresar
+          </button>
+        </form>
+        <!-- Botón de Recuperar Contraseña -->
+        <!-- Botón para abrir el modal -->
+        <button (click)="abrirModal()" class="mt-4 text-sm text-gray-600 hover:text-gray-800 transition">
+          ¿Olvidaste tu contraseña?
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,101 @@
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #e0e0e0;
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2), 
+                -15px -15px 30px rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    z-index: 1000;
+  }
+  
+  /* Cuando el menú está colapsado */
+  .menu-lateral.collapsed {
+    width: 55px;
+  }
+  
+
+/* Estilos de los iconos */
+.menu-lateral ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-lateral li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Tamaño normal de los iconos */
+.menu-lateral ion-icon {
+    font-size: 24px;
+    transition: font-size 0.3s ease-in-out;
+}
+
+/* Aumentar el tamaño cuando el menú está colapsado */
+.menu-lateral.collapsed ion-icon {
+    font-size: 32px;
+}
+
+/* Centrar los iconos cuando el menú está colapsado */
+.menu-lateral.collapsed li {
+    justify-content: center;
+}
+
+/* Ocultar el texto cuando el menú está colapsado */
+.menu-lateral.collapsed span {
+    display: none;
+}
+
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 50px 0;
+}
+
+nav ul li {
+    margin-bottom: 20px;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 12px;
+    transition: background 0.2s ease-in-out;
+}
+
+nav ul li a ion-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+nav ul li a:hover {
+    background: #d0d0d0;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1),
+        inset -5px -5px 10px rgba(255, 255, 255, 0.7);
+}
+
+.menu-lateral.collapsed nav ul li a span {
+    display: none;
+}
