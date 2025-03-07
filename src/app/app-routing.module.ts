@@ -45,6 +45,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inventario/inventario.module').then( m => m.InventarioPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'trabajadores',
+    loadChildren: () => import('./pages/trabajadores/trabajadores.module').then( m => m.TrabajadoresPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
 ];
 
 @NgModule({

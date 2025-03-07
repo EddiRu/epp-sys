@@ -20,13 +20,14 @@ import { TituloService } from 'src/app/services/titulo.service';
 export class MenuComponent  implements OnInit {
 
   menuColapsado = false;
-
+  
   menuItems = [
     { label: 'Dashboard', icon: 'bar-chart-outline', route: '/dashboard' },
     { label: 'Reportes', icon: 'document-text-outline', route: '/reports' },
     { label: 'Asignación de Equipos', icon: 'shield-outline', route: '/epp' },
+    { label: 'Trabajadores', icon: 'people-outline', route: '/trabajadores' },
     { label: 'Inventario de Equipos', icon: 'pricetags-outline', route: '/inventario' },
-    { label: 'Gestión de Usuarios', icon: 'people-outline', route: '/users' },
+    { label: 'Gestión de Usuarios', icon: 'person-outline', route: '/users' },
     
     
   ];

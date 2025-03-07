@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule, ModalController, ToastController } from '@ionic/angular';
+import { IonicModule, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { FiredatabaseService } from 'src/app/services/firebase/firedatabase.service';
 
 @Component({
@@ -24,7 +24,8 @@ export class AgregarEquipoComponent  implements OnInit {
     private firedatabase: FiredatabaseService,
     private fb: FormBuilder,
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private laodController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -53,21 +54,35 @@ export class AgregarEquipoComponent  implements OnInit {
     await this.modalController.dismiss(null)
   }
 
-  guardarEquipo() {
+  async guardarEquipo() {
+
+    const loadEquipo = await this.laodController.create({
+      message: 'Guardando cambios...',
+      translucent: true,
+      spinner: 'dots',
+      mode: 'ios'
+    })
+
+    await loadEquipo.present();
+
+
     if (this.equipoForm.valid) {
       this.firedatabase.addEquipo(this.equipoForm.value)
        .then(() => {
           this.presentToast('success', 'El equipo ha sido agregado correctamente');
           this.cerrarModal();
+          loadEquipo.dismiss();
         })
        .catch((error) => {
           console.error(error);
           this.presentToast('error', 'Hubo un error al agregar el equipo');
+          loadEquipo.dismiss();
         });
 
       this.equipoForm.reset();
     }else{
       this.presentToast('warning', 'Por favor, complete todos los campos');
+      loadEquipo.dismiss();
     }
   }
 

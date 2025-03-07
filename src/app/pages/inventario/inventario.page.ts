@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AgregarEquipoComponent } from 'src/app/components/modal/agregar-equipo/agregar-equipo.component';
 import { EditarEquipoComponent } from 'src/app/components/modal/editar-equipo/editar-equipo.component';
-import { AuthService } from 'src/app/services/firebase/auth.service';
 import { FiredatabaseService } from 'src/app/services/firebase/firedatabase.service';
 
 @Component({

@@ -1,0 +1,67 @@
+<ion-content [fullscreen]="true" style="--overflow: hidden;">
+  <div class="bg-gray-200 max-h-screen flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-lg">
+      <h4 class="text-2xl md:text-3xl font-bold text-gray-700 mb-2 text-center">
+        Editar Trabajador
+      </h4>
+
+      <form [formGroup]="trabajadorForm" (ngSubmit)="guardarCambios()">
+
+        <!-- Nombre del Trabajador -->
+        <div class="mt-3">
+          <label class="block text-sm font-medium text-gray-600">Nombre</label>
+          <input type="text" placeholder="Ej: Juan Pérez"
+            class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+            formControlName="nombre" required>
+        </div>
+
+        <!-- 📌 FILA: Puesto + Departamento -->
+        <div class="flex space-x-3 mt-3">
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Puesto</label>
+            <input type="text" placeholder="Ej: Operador de maquinaria"
+              class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="puesto" required>
+          </div>
+
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Departamento</label>
+            <input type="text" placeholder="Ej: Minería"
+              class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="departamento" required>
+          </div>
+        </div>
+
+        <!-- 📌 FILA: Fecha de Registro + Estado -->
+        <div class="flex space-x-3 mt-3">
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Fecha de Registro</label>
+            <input type="date"
+              class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="fecha_registro" required>
+          </div>
+
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Estado</label>
+            <select class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="estado" required>
+              <option [value]="'Activo'">Activo</option>
+              <option [value]="'Inactivo'">Inactivo</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit"
+          class="w-full mt-6 p-3 rounded-xl bg-blue-400 text-white font-semibold shadow-lg hover:bg-blue-500 transition-all">
+          Guardar Cambios
+        </button>
+
+        <button type="button" (click)="cerrarModal()"
+          class="w-full mt-4 text-sm text-gray-600 hover:text-gray-800 transition block text-center">
+          Cancelar
+        </button>
+
+      </form>
+    </div>
+  </div>
+</ion-content>
