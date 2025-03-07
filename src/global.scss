@@ -118,6 +118,33 @@ ion-app {
   justify-content: center;
 }
 
+/* Estilo de modal para agregar o editar equipos */
+.modal-contenedor-agregar-equipo {
+  --width: 30%;
+  --height: 650px;
+  --border-radius: 20px;
+  --background: #e0e0e0;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2),
+    -15px -15px 30px rgba(255, 255, 255, 0.7);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-contenedor-editar-equipo {
+  --width: 30%;
+  --height: 650px;
+  --border-radius: 20px;
+  --background: #e0e0e0;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2),
+    -15px -15px 30px rgba(255, 255, 255, 0.7);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .custom-alert .alert-title {
   font-weight: bold;
   font-size: 1.2rem;

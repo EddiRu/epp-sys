@@ -27,16 +27,9 @@ export class AppComponent {
   constructor(
     private menuService: MenuService,
     private tituloService: TituloService,
-    private auth: Auth,
-    private router: Router
+    private auth: Auth
   ) {
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Verificar si la ruta existe en los módulos, si no, dejar Dashboard por defecto
-        this.tituloModulo = this.modulos[event.url] || 'Dashboard';
-      }
-    });
 
     onAuthStateChanged(this.auth, (user) => {
       this.usuarioAutenticado = !!user;

@@ -23,10 +23,12 @@ export class MenuComponent  implements OnInit {
 
   menuItems = [
     { label: 'Dashboard', icon: 'bar-chart-outline', route: '/dashboard' },
-    { label: 'Gestión de Usuarios', icon: 'people-outline', route: '/users' },
-    { label: 'Registro de Equipos', icon: 'shield-outline', route: '/epp' },
     { label: 'Reportes', icon: 'document-text-outline', route: '/reports' },
-    { label: 'Configuración', icon: 'settings-outline', route: '/configuracion' }
+    { label: 'Asignación de Equipos', icon: 'shield-outline', route: '/epp' },
+    { label: 'Inventario de Equipos', icon: 'pricetags-outline', route: '/inventario' },
+    { label: 'Gestión de Usuarios', icon: 'people-outline', route: '/users' },
+    
+    
   ];
 
   constructor(

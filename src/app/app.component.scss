@@ -1,3 +1,4 @@
+/*
 .page-header {
   position: fixed;
   top: 0;
@@ -15,7 +16,7 @@
   color: #333;
   z-index: 1000;
 }
-
+*/
 /* Ajustar margen para que el contenido no quede debajo del header */
 main {
   transition: margin-left 0.3s ease-in-out, padding-top 0.3s ease-in-out;
@@ -37,6 +38,7 @@ ion-content {
   display: block;
 }
 
+/*
 .page-header {
   position: fixed;
   top: 0;
@@ -54,12 +56,14 @@ ion-content {
   color: #333;
   z-index: 900;
 }
-
+*/
 /* Estilos cuando el menú está abierto */
 main {
   position: absolute;
-  top: 60px; /* Espacio para el header */
-  width: calc(100% - 250px); /* Ajuste automático al tamaño del menú */
+  top: 60px;
+  /* Espacio para el header */
+  width: calc(100% - 250px);
+  /* Ajuste automático al tamaño del menú */
   height: calc(100vh - 60px);
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
   padding: 20px;

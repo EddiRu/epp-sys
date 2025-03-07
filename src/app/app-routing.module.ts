@@ -40,6 +40,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/epp/epp.module').then( m => m.EppPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'inventario',
+    loadChildren: () => import('./pages/inventario/inventario.module').then( m => m.InventarioPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
 ];
 
 @NgModule({

@@ -5,19 +5,19 @@
     width: 250px;
     height: 100vh;
     background: #e0e0e0;
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2), 
-                -15px -15px 30px rgba(255, 255, 255, 0.7);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2),
+        -15px -15px 30px rgba(255, 255, 255, 0.7);
     padding: 20px;
     transition: width 0.3s ease-in-out;
     overflow: hidden;
     z-index: 1000;
-  }
-  
-  /* Cuando el menú está colapsado */
-  .menu-lateral.collapsed {
+}
+
+/* Cuando el menú está colapsado */
+.menu-lateral.collapsed {
     width: 55px;
-  }
-  
+}
+
 
 /* Estilos de los iconos */
 .menu-lateral ul {

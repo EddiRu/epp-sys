@@ -139,7 +139,6 @@ export class UsersPage implements OnInit {
   }
 
   async bloquearUsuario(usuario: any) {
-    console.log(usuario)
     const alert = await this.alertController.create({
       header: 'Confirmar Eliminación',
       message: `¿Estás seguro de que deseas ${usuario.actInact == "false" ? 'Desbloquear' : 'Bloquear'} a ${usuario.usuario}?`,
@@ -164,15 +163,11 @@ export class UsersPage implements OnInit {
                 this.presentToast('success','Usuario deshabilitado correctamente');
               })
             }
-
-            
-            
           },
           cssClass: usuario.actInact == "false" ? 'success-button' : 'delete-button'
         }
       ]
     });
-
     await alert.present();
   }
 
