@@ -13,10 +13,11 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { MenuComponent } from './components/menu/menu.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), MenuComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), MenuComponent, NgApexchartsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({ projectId: "epp-sys", appId: "1:74203027225:web:9b1e666be7837044c1d788", storageBucket: "epp-sys.firebasestorage.app", apiKey: "AIzaSyDebcwquWGQSwl5nTSL4SntKOozrbzTCPo", authDomain: "epp-sys.firebaseapp.com", messagingSenderId: "74203027225", measurementId: "G-1EFWR32SXB" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage())],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,105 @@
+<ion-content [fullscreen]="true" style="--overflow: hidden;">
+  <div class="max-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="w-full max-w-lg">
+      <!-- 📌 Título -->
+      <h4 class="text-2xl md:text-3xl font-bold text-gray-700 mb-2 text-center">
+        📋 Asignación de Equipo
+      </h4>
+
+      <form [formGroup]="asignacionForm" (ngSubmit)="guardarAsignacion()">
+
+        <!-- 📌 FILA: Fecha de Entrega + Turno -->
+        <div class="flex space-x-3 mt-3">
+          <!-- 📆 Fecha de Entrega -->
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Fecha de Entrega</label>
+            <input type="date"
+              class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="fecha_asignacion" required>
+          </div>
+
+          <!-- 🔄 Turno -->
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Turno</label>
+            <select class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="turno" required>
+              <option value="1RA">1RA</option>
+              <option value="2DA">2DA</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 👷 Trabajador -->
+        <div class="mt-3">
+          <label class="block text-sm font-medium text-gray-600">Trabajador</label>
+          <ion-select interface="popover" formControlName="trabajador_id">
+            <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+              {{ trabajador.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+
+        <!-- 🛠️ Equipo Asignado -->
+        <div class="mt-3">
+          <label class="block text-sm font-medium text-gray-600">Equipo Asignado</label>
+          <ion-select interface="popover" formControlName="equipo_id">
+            <ion-select-option *ngFor="let equipo of equipos" [value]="equipo.id">
+              {{ equipo.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+
+        <!-- 📌 FILA: Cantidad + Motivo de Entrega -->
+        <div class="flex space-x-3 mt-3">
+          <!-- 🔢 Cantidad -->
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Cantidad</label>
+            <input type="number" min="1"
+              class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="cantidad" required>
+          </div>
+
+          <!-- 🔄 Motivo de Entrega -->
+          <div class="w-1/2">
+            <label class="block text-sm font-medium text-gray-600">Motivo de Entrega</label>
+            <select class="w-full p-3 mt-1 rounded-xl bg-gray-200 shadow-inner focus:outline-none text-base"
+              formControlName="motivo" required>
+              <option value="Entrega inicial">Entrega inicial</option>
+              <option value="Cambio">Cambio</option>
+              <option value="Pérdida">Pérdida</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ✅ Firma de Recibido -->
+        <div class="mt-3 flex items-center">
+          <input type="checkbox" formControlName="firmado" class="w-5 h-5 rounded-md mr-2">
+          <label class="text-sm font-medium text-gray-600">Firma de Recibido</label>
+        </div>
+
+        <!-- 👤 Responsable de la Entrega -->
+        <div class="mt-3">
+          <label class="block text-sm font-medium text-gray-600">Responsable de la Entrega</label>
+          <input type="text" disabled
+            class="w-full p-3 mt-1 rounded-xl bg-gray-300 shadow-inner focus:outline-none text-base"
+            [value]="usuarioActual?.usuario">
+        </div>
+
+        <!-- ✅ Botón de Guardar -->
+        <button type="submit"
+          class="w-full mt-6 p-3 rounded-xl bg-gray-300 shadow-[6px_6px_12px_rgba(0,0,0,0.2),-6px_-6px_12px_rgba(255,255,255,0.7)] 
+                  active:shadow-[inset_6px_6px_12px_rgba(0,0,0,0.2),inset_-6px_-6px_12px_rgba(255,255,255,0.7)] 
+                  transition-all text-base font-semibold">
+          Guardar Asignación
+        </button>
+
+        <!-- ❌ Botón de Cancelar -->
+        <button type="button" (click)="cerrarModal()"
+          class="w-full mt-4 text-sm text-gray-600 hover:text-gray-800 transition block text-center">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+</ion-content>

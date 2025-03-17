@@ -22,8 +22,6 @@ main {
   transition: margin-left 0.3s ease-in-out, padding-top 0.3s ease-in-out;
   margin-left: 250px;
   /* Ajuste para el menú lateral */
-  padding-top: 80px;
-  /* Espacio suficiente debajo del header */
 }
 
 /* Cuando el menú está colapsado, ajustar el margen */
@@ -33,7 +31,6 @@ main {
 
 /* Ajustar también ion-content */
 ion-content {
-  padding-top: 60px;
   /* Espacio suficiente debajo del header */
   display: block;
 }
@@ -60,11 +57,10 @@ ion-content {
 /* Estilos cuando el menú está abierto */
 main {
   position: absolute;
-  top: 60px;
   /* Espacio para el header */
   width: calc(100% - 250px);
   /* Ajuste automático al tamaño del menú */
-  height: calc(100vh - 60px);
+  height: 100vh;
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
   padding: 20px;
   background: white;

@@ -1,7 +1,5 @@
 <ion-app *ngIf="usuarioAutenticado">
   <app-menu></app-menu>
-
-
   <!-- Contenedor principal que se ajusta automáticamente -->
   <main [class.menu-collapsed]="menuColapsado">
     <ion-router-outlet></ion-router-outlet>

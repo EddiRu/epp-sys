@@ -24,7 +24,6 @@ export class MenuComponent  implements OnInit {
   menuItems = [
     { label: 'Dashboard', icon: 'bar-chart-outline', route: '/dashboard' },
     { label: 'Reportes', icon: 'document-text-outline', route: '/reports' },
-    { label: 'Asignación de Equipos', icon: 'shield-outline', route: '/epp' },
     { label: 'Trabajadores', icon: 'people-outline', route: '/trabajadores' },
     { label: 'Inventario de Equipos', icon: 'pricetags-outline', route: '/inventario' },
     { label: 'Gestión de Usuarios', icon: 'person-outline', route: '/users' },
@@ -42,14 +41,6 @@ export class MenuComponent  implements OnInit {
     this.menuService.menuColapsado$.subscribe(state => {
       this.menuColapsado = state;
     });
-
-    // Detectar cambios en la navegación y restaurar el estado del menú
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.actualizarTitulo();
-        this.menuService.setMenuState(false); // Siempre desplegar el menú al cambiar de página
-      }
-    });
   }
 
   ngOnInit() {
@@ -58,14 +49,6 @@ export class MenuComponent  implements OnInit {
 
   toggleMenu() {
     this.menuService.toggleMenu();
-  }
-
-  actualizarTitulo() {
-    const rutaActual = this.router.url;
-    const itemEncontrado = this.menuItems.find(item => item.route === rutaActual);
-    if (itemEncontrado) {
-      this.tituloService.setTitulo(itemEncontrado.label);
-    }
   }
 
   async cerrarSesion(){

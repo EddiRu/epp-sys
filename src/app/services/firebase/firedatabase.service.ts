@@ -22,6 +22,11 @@ export class FiredatabaseService {
     private firestore: Firestore
   ) { }
 
+  getUsuarios(): Observable<any[]> {
+    const registroRef = collection(this.firestore, 'usuarios');
+    return collectionData(registroRef, { idField: 'id' }) as Observable<any[]>;
+  }
+
 
   /*
     Gestión de equipo
@@ -89,6 +94,49 @@ export class FiredatabaseService {
       departamento: reporte.departamento,
       fecha_registro: reporte.fecha_registro,
       estado: reporte.estado
+    });
+  }
+
+  /*
+    Asignaicones de equipos
+  */
+
+  getAsignaciones(): Observable<any[]> {
+    const registroRef = collection(this.firestore, 'asignaciones');
+    return collectionData(registroRef, { idField: 'id' }) as Observable<any[]>;
+  }
+
+  getAsignacionById(id: string): Observable<any> {
+    const registroRef = doc(this.firestore, `asignaciones/${id}`);
+    return docData(registroRef) as Observable<any>;
+  }
+
+  addAsignacion(reporte: any): Promise<any> {
+    return addDoc(collection(this.firestore, 'asignaciones'), reporte);
+  }
+
+  deleteAsignacion(id: string) {
+    const registroRef = doc(this.firestore, `asignaciones/${id}`);
+    return deleteDoc(registroRef);
+  }
+
+  updateAsignacion(reporte: any): Promise<any> {
+    const registroRef = doc(this.firestore, `asignaciones/${reporte.id}`);
+    return updateDoc(registroRef, {
+      fecha_asignacion: reporte.fecha_asignacion,
+      turno: reporte.turno,
+      trabajador_id: reporte.trabajador_id,
+      nombre_trabajador: reporte.nombre_trabajador,
+      equipo_id: reporte.equipo_id,
+      nombre_equipo: reporte.nombre_equipo,
+      cantidad: reporte.cantidad,
+      motivo: reporte.motivo,
+      firmado: reporte.firmado,
+      usuario_asigna_id: reporte.usuario_asigna_id,
+      nombre_usuario_asigna: reporte.nombre_usuario_asigna,
+      rol_usuario_asigna: reporte.rol_usuario_asigna,
+      unidad: reporte.unidad,
+      responsable_entrega: reporte.responsable_entrega
     });
   }
 }

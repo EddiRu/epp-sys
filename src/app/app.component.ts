@@ -15,15 +15,6 @@ export class AppComponent {
   menuColapsado = false;
   usuarioAutenticado: boolean = false;
 
-  // Definir nombres de módulos según la ruta
-  modulos: { [key: string]: string } = {
-    '/dashboard': 'Dashboard',
-    '/users': 'Gestión de Usuarios',
-    '/equipos': 'Registro de Equipos',
-    '/reportes': 'Reportes',
-    '/configuracion': 'Configuración',
-  };
-
   constructor(
     private menuService: MenuService,
     private tituloService: TituloService,
@@ -39,8 +30,5 @@ export class AppComponent {
       this.menuColapsado = state;
     });
 
-    this.tituloService.titulo$.subscribe(titulo => {
-      this.tituloModulo = titulo;
-    });
   }
 }

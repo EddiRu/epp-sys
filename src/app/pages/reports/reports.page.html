@@ -1,6 +1,135 @@
-<ion-content>
-  <div class="dashboard-container">
-    <h2>Bienvenido al EPP</h2>
-    <p>Esta es la información del sistema.</p>
+<ion-content [fullscreen]="true">
+  <div class="bg-gray-200 min-h-screen flex flex-col items-center p-4">
+
+    <!-- 🔍 Tarjeta de Filtros -->
+    <h4 class="text-xl font-bold text-gray-700 text-center mb-4">📊 Filtros de Reportes</h4>
+    <div class="w-full max-w-6xl bg-white rounded-xl shadow-lg p-4 mb-4">
+
+
+      <form [formGroup]="filtroForm" (ngSubmit)="aplicarFiltros()">
+
+        <!-- 📌 Fila de Filtros (TODO EN UNA SOLA FILA) -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
+
+          <!-- 🔍 Barra de Búsqueda -->
+
+          <!-- 📅 Fecha Inicio -->
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Fecha Inicio</label>
+            <input type="date" formControlName="fechaInicio"
+              class="w-full p-2 mt-1 rounded-lg bg-gray-200 shadow-inner focus:outline-none">
+          </div>
+
+          <!-- 📅 Fecha Fin -->
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Fecha Fin</label>
+            <input type="date" formControlName="fechaFin"
+              class="w-full p-2 mt-1 rounded-lg bg-gray-200 shadow-inner focus:outline-none">
+          </div>
+
+          <!-- 👷 Trabajador -->
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Trabajador</label>
+            <ion-select interface="popover" formControlName="trabajador">
+              <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+                {{ trabajador.nombre }}
+              </ion-select-option>
+            </ion-select>
+          </div>
+
+          <!-- 🛠️ Equipo -->
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Equipo</label>
+            <ion-select interface="popover" formControlName="equipo" >
+              <ion-select-option *ngFor="let equipo of equipos" [value]="equipo.id">
+                {{ equipo.nombre }}
+              </ion-select-option>
+            </ion-select>
+          </div>
+
+          <!-- 👤 Usuario Asignador -->
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Asignador</label>
+            <ion-select interface="popover" formControlName="usuarioAsignador">
+              <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.email">
+                {{ usuario.usuario }}
+              </ion-select-option>
+            </ion-select>
+          </div>
+
+        </div>
+
+        <!-- 🔄 Botón Aplicar Filtro -->
+        <div class="mt-4 flex justify-center">
+          <button type="submit" class="px-6 py-2 rounded-lg bg-blue-400 text-white font-semibold shadow-lg 
+                  hover:bg-blue-500 transition-all">
+            Aplicar Filtros
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- 📜 Tarjeta de Resultados -->
+    <h4 class="text-xl font-bold text-gray-700 text-center mb-4">📑 Resultados</h4>
+    <div class="w-full max-w-6xl bg-white rounded-xl shadow-lg p-4">
+      <div>
+        <ion-searchbar  (ionInput)="filtrarResultados($event)" mode="ios"></ion-searchbar>
+      </div>
+
+      <!-- 🌟 Tabla de Resultados -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-200 text-gray-700 text-sm">
+              <th class="p-3">Trabajador</th>
+              <th class="p-3">Equipo</th>
+              <th class="p-3">Cantidad</th>
+              <th class="p-3">Motivo</th>
+              <th class="p-3">Fecha</th>
+              <th class="p-3">Usuario Asignador</th>
+              <th class="p-3 text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let asignacion of asignacionesFiltradas | paginate: { itemsPerPage: 10, currentPage: paginaActual }"
+              class="border-b border-gray-300 text-gray-600 text-sm">
+              <td class="p-3">{{ asignacion.nombre_trabajador }}</td>
+              <td class="p-3">{{ asignacion.nombre_equipo }}</td>
+              <td class="p-3 text-center">{{ asignacion.cantidad }}</td>
+              <td class="p-3">{{ asignacion.motivo }}</td>
+              <td class="p-3 text-center">{{ asignacion.fecha_asignacion | date:'dd/MM/yyyy' }}</td>
+              <td class="p-3">{{ asignacion.nombre_usuario_asigna }}</td>
+              <td class="p-3 text-center">
+                <!-- ✏️ Editar -->
+                <button (click)="editarAsignacion(asignacion)" class="text-blue-500 hover:text-blue-700">
+                  <ion-icon name="create-outline"></ion-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 📄 Paginación -->
+      <div class="flex justify-between items-center mt-3">
+        <button (click)="paginaAnterior()"
+          class="px-3 py-1 text-gray-700 rounded-lg shadow-sm bg-gray-300 hover:bg-gray-400 transition text-sm">
+          Anterior
+        </button>
+        <span class="text-gray-600 text-sm">Página {{ paginaActual }} de {{ totalPaginas }}</span>
+        <button (click)="paginaSiguiente()"
+          class="px-3 py-1 text-gray-700 rounded-lg shadow-sm bg-gray-300 hover:bg-gray-400 transition text-sm">
+          Siguiente
+        </button>
+      </div>
+
+    </div>
   </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="exportarAExcel()">
+      <ion-icon name="document-text-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
