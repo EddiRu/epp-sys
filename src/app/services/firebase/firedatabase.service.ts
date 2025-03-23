@@ -126,17 +126,12 @@ export class FiredatabaseService {
       fecha_asignacion: reporte.fecha_asignacion,
       turno: reporte.turno,
       trabajador_id: reporte.trabajador_id,
-      nombre_trabajador: reporte.nombre_trabajador,
       equipo_id: reporte.equipo_id,
-      nombre_equipo: reporte.nombre_equipo,
       cantidad: reporte.cantidad,
       motivo: reporte.motivo,
       firmado: reporte.firmado,
       usuario_asigna_id: reporte.usuario_asigna_id,
-      nombre_usuario_asigna: reporte.nombre_usuario_asigna,
-      rol_usuario_asigna: reporte.rol_usuario_asigna,
-      unidad: reporte.unidad,
-      responsable_entrega: reporte.responsable_entrega
+      nombre_usuario_asigna: reporte.nombre_usuario_asigna
     });
   }
 }

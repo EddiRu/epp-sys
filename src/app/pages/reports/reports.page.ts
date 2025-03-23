@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { FiredatabaseService } from 'src/app/services/firebase/firedatabase.service';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { EditarAsignacionComponent } from 'src/app/components/modal/editar-asignacion/editar-asignacion.component';
 
 @Component({
   selector: 'app-reports',
@@ -29,7 +30,8 @@ export class ReportsPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private firebaseService: FiredatabaseService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private modalController: ModalController
   ) {
 
   }
@@ -165,7 +167,15 @@ export class ReportsPage implements OnInit {
   }
 
   async editarAsignacion(asignacion:any){
+    const modalActualizarAsignacion = await this.modalController.create({
+      component: EditarAsignacionComponent,
+      componentProps: {
+        asignacion: asignacion
+      },
+      cssClass: 'modal-contenedor-agregar-asignacion'
+    });
 
+    modalActualizarAsignacion.present();
   }
 
   exportarAExcel() {

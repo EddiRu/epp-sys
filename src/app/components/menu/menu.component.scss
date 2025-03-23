@@ -6,55 +6,87 @@
     height: 100vh;
     background: #e0e0e0;
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2),
-        -15px -15px 30px rgba(255, 255, 255, 0.7);
+                -15px -15px 30px rgba(255, 255, 255, 0.7);
     padding: 20px;
     transition: width 0.3s ease-in-out;
     overflow: hidden;
     z-index: 1000;
-}
-
-/* Cuando el menú está colapsado */
-.menu-lateral.collapsed {
+  }
+  
+  /* Menú colapsado */
+  .menu-lateral.collapsed {
     width: 55px;
-}
-
-
-/* Estilos de los iconos */
-.menu-lateral ul {
+  }
+  
+  /* Lista de navegación */
+  .menu-lateral ul {
     list-style: none;
     padding: 0;
-}
-
-.menu-lateral li {
-    display: flex;
-    align-items: center;
+    margin-top: 60px;
+  }
+  
+  .menu-lateral li {
     margin-bottom: 15px;
     transition: all 0.3s ease-in-out;
-}
-
-/* Tamaño normal de los iconos */
-.menu-lateral ion-icon {
+  }
+  
+  /* Enlaces del menú */
+  .menu-lateral a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    height: 48px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #000;
+    background: #e0e0e0;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+                -5px -5px 10px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Hover con efecto profundidad */
+  .menu-lateral a:hover {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1),
+                inset -5px -5px 10px rgba(255, 255, 255, 0.6);
+    background-color: #dcdcdc;
+    color: #333;
+  }
+  
+  /* Íconos */
+  .menu-lateral ion-icon {
     font-size: 24px;
     transition: font-size 0.3s ease-in-out;
-}
-
-/* Aumentar el tamaño cuando el menú está colapsado */
-.menu-lateral.collapsed ion-icon {
+  }
+  
+  /* Íconos grandes al colapsar */
+  .menu-lateral.collapsed ion-icon {
     font-size: 32px;
-}
-
-/* Centrar los iconos cuando el menú está colapsado */
-.menu-lateral.collapsed li {
+  }
+  
+  .menu-lateral.collapsed li {
+    display: flex;
     justify-content: center;
-}
-
-/* Ocultar el texto cuando el menú está colapsado */
-.menu-lateral.collapsed span {
+  }
+  
+  .menu-lateral.collapsed a {
+    justify-content: center;
+    padding: 10px 0;
+  }
+  
+  /* Ocultar texto al colapsar */
+  .menu-lateral.collapsed span {
     display: none;
-}
-
-
-.toggle-btn {
+  }
+  
+  /* Texto en negrita */
+  .menu-lateral a span {
+    font-weight: bold;
+  }
+  
+  /* Botón para colapsar */
+  .toggle-btn {
     background: none;
     border: none;
     font-size: 24px;
@@ -62,40 +94,5 @@
     position: absolute;
     top: 15px;
     right: 15px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 50px 0;
-}
-
-nav ul li {
-    margin-bottom: 20px;
-}
-
-nav ul li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 12px;
-    transition: background 0.2s ease-in-out;
-}
-
-nav ul li a ion-icon {
-    font-size: 24px;
-    margin-right: 10px;
-}
-
-nav ul li a:hover {
-    background: #d0d0d0;
-    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1),
-        inset -5px -5px 10px rgba(255, 255, 255, 0.7);
-}
-
-.menu-lateral.collapsed nav ul li a span {
-    display: none;
-}
+  }
+  
